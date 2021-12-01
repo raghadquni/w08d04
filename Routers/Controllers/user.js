@@ -83,7 +83,20 @@ const login = (req, res) => {
     });
 };
 
+const deleteUser = (req, res) => {
+  const { id } = req.body
+  userModel
+  .findByIdAndUpdate( id, {isDel: true})
+  .then((result) => {
+    if(result) {
+      res.status(200).json("User is Deleted");
+    }
+  })
+  .catch((err) => {
+    console.log(err)
+    res.send(err);
+  });
+}
 
 
-
-module.exports = { register, getUsers, login };
+module.exports = { register, getUsers, login , deleteUser};
