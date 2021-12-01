@@ -2,8 +2,8 @@ const express = require("express");
 const userRouter = express.Router();
 const { register, getUsers, login , deleteUser} = require("../Controllers/user");
 
-const authentication = require("../middleware/authentication");
-const authorization = require("../middleware/authorization");
+const authentication = require("../MiddleWare/authentication");
+const authorization = require("../MiddleWare/authorization");
 
 
 userRouter.post("/signup", register);

@@ -90,6 +90,8 @@ const deleteUser = (req, res) => {
   .then((result) => {
     if(result) {
       res.status(200).json("User is Deleted");
+    } else {
+      res.status(400).json("User not found")
     }
   })
   .catch((err) => {
