@@ -8,12 +8,12 @@ app.use(express.json());
 
 
 // for Role
-// const roleRouter = require("./Routers/Routes/role");
-// app.use(roleRouter);
+const roleRouter = require("./Routers/Routes/role");
+app.use(roleRouter);
 
-//for User
-// const userRouter = require("./Routers/Routes/user");
-// app.use(userRouter);
+// for User
+const userRouter = require("./Routers/Routes/user");
+app.use(userRouter);
 
 
 
