@@ -33,11 +33,14 @@ const register = async (req, res) => {
 // get all users
 const getUsers = (req, res) => {
   userModel
-    .find({})
+    .find({isDel: false})
+    .populate("role")
     .then((result) => {
+      console.log(result,"all users")
       res.send(result);
     })
     .catch((err) => {
+      console.log(err)
       res.send(err);
     });
 };

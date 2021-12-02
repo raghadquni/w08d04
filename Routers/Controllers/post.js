@@ -1,4 +1,5 @@
 const postModel = require("../../db/models/post");
+const commentModel = require("./../../db/models/comment");
 
 
 const addPost = (req, res) => {
@@ -53,14 +54,19 @@ const getAllPost = (req, res) => {
   const deletePost = (req, res) => {
     const { id } = req.body;
     postModel
-    .findOneAndUpdate({user: req.token.id, isDel: false ,_id: id }, 
+    .findOneAndUpdate({ _id: id , user: req.token.id, isDel: false }, 
         {isDel: true}, 
-        {new:true})
+        {new:true}).exec()
     .then((result) => {
-        if(!result) {
-            return res.status(400).json("dont have any post");
-        } else {
-            return res.status(200).json("deleted");
+        if(result) {
+          res.status(200).json("deleted")
+          commentModel
+          .updateMany({user: id}, { $set: { isDel: true}})
+          .catch((err) => {
+            res.status(400).send(err)
+        }) 
+      } else {
+           res.status(404).json("its already delete");
         }
     }) 
     .catch((err) => {
@@ -88,4 +94,31 @@ const getAllPost = (req, res) => {
   }
 
 
-module.exports = {addPost, getAllPost, getPost, deletePost,updatePost};
+  const adminDeletePost = (req, res) => {
+    const { id } = req.body;
+    postModel
+    .findOneAndUpdate({ _id: id , isDel: false }, 
+      {isDel: true}, 
+      {new:true}).exec()
+      .then((result) => {
+        if (result) {
+          res.status(200).json("deleted")
+          commentModel
+          .updateMany({user: id}, { $set: { isDel: true}})
+          .catch((err) => {
+            res.status(400).send(err)
+        }) 
+        }
+        else {
+          res.status(404).json("its already delete");
+       }
+      })
+      .catch((err) => {
+        res.status(400).json(err);
+      });
+  }
+
+
+
+
+module.exports = {addPost, getAllPost, getPost, deletePost,updatePost, adminDeletePost};

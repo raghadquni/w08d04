@@ -5,7 +5,7 @@ const authentication = require("./../MiddleWare/authentication");
 const authorization = require("./../MiddleWare/authorization")
 
 
-roleRouter.post("/createRole", createRole);
-roleRouter.get("/getRole", getRole , authentication, authorization);
+roleRouter.post("/createRole" , authentication, authorization, createRole);
+roleRouter.get("/getRole" , authentication, authorization, getRole);
 
 module.exports = roleRouter;

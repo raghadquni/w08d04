@@ -7,9 +7,9 @@ const authorization = require("../MiddleWare/authorization");
 
 
 userRouter.post("/signup", register);
-userRouter.get("/getUsers", getUsers , authentication, authorization);
+userRouter.get("/getUsers", authentication, authorization, getUsers); // admin token
 userRouter.post("/login", login);
-userRouter.put("/delete", deleteUser);
+userRouter.put("/delete", authentication, authorization ,deleteUser); // admin token
 
 
 module.exports = userRouter;
