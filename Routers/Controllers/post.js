@@ -1,5 +1,7 @@
 const postModel = require("../../db/models/post");
 const commentModel = require("./../../db/models/comment");
+const likeModel = require("./../../db/models/like");
+
 
 
 const addPost = (req, res) => {
@@ -118,7 +120,41 @@ const getAllPost = (req, res) => {
       });
   }
 
+  const addLikes = (req, res) => {
+    const { post } = req.params;
+      likeModel
+      .findOne({post: post, user: req.token.id})
+      .then((result) => {
+        if(result) {
+          likeModel
+          .findByIdAndUpdate(
+            {post: post, user: req.token.id },
+            { isLiked: !ruselt.isLiked }
+          )
+          .then((result2) => {
+              res.status(200).json({result2});
+          })
+          .catch((err) => {
+            res.status(400).send(err);
+          });
+            } else {
+              const likePost = new likeModel({
+                post: post,
+                user: req.token.id,
+              });
+              likePost
+              .save()
+              .then((newResult) => {
+                res.status(201).send(newResult);
+              })
+              .catch((error) => {
+                res.status(400).send(error);
+              });
+          }
+        })
+        .catch((err) => {
+          res.status(400).send(err);
+        });
+    };
 
-
-
-module.exports = {addPost, getAllPost, getPost, deletePost,updatePost, adminDeletePost};
+module.exports = {addPost, getAllPost, getPost, deletePost,updatePost, adminDeletePost, addLikes};
