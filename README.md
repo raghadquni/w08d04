@@ -22,7 +22,7 @@ Register/Login project with authentication and authorization and creating new us
 ### Like
 * like post
 
-### comment
+### Comment
 * Add comment
 * Delete comment
 * Show Comments
