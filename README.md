@@ -10,7 +10,7 @@ Register/Login project with authentication and authorization and creating new us
 * Show all Users (For Admin)
 * Delete users (For Admin)
 
-### Post
+1. Post
 * add a new post
 * Show all post
 * Show one post
