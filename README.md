@@ -2,7 +2,7 @@
 
 Register/Login project with authentication and authorization and creating new user (Admin/User) with a hashed password
 
-# The features in this project
+## The features in this project
 
 ## Users
 * Register a new User
