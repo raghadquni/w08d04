@@ -4,7 +4,7 @@ Register/Login project with authentication and authorization and creating new us
 
 ## The features in this project
 
-## Users
+### Users
 * Register a new User
 * Login
 * Show all Users (For Admin)
