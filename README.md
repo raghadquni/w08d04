@@ -10,7 +10,7 @@ Register/Login project with authentication and authorization and creating new us
 * Show all Users (For Admin)
 * Delete users (For Admin)
 
-## Post
+### Post
 * add a new post
 * Show all post
 * Show one post
@@ -18,7 +18,7 @@ Register/Login project with authentication and authorization and creating new us
 * delete post for any user (For Admin)
 * Update post
 
-## Like
+### Like
 * like post
 
 ## comment
