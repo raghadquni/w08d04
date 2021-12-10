@@ -27,6 +27,7 @@ const register = async (req, res) => {
     })
     .catch((err) => {
       res.status(400).send(err);
+      console.log(err);
     });
 };
 
@@ -102,6 +103,8 @@ const deleteUser = (req, res) => {
     res.send(err);
   });
 }
+
+
 
 
 module.exports = { register, getUsers, login , deleteUser};
