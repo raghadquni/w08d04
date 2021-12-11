@@ -2,24 +2,36 @@ const userModel = require("../../db/models/user");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
+
 const secret = process.env.SECRET_KEY;
 require("dotenv").config();
 
 
 // register (new User)
 const register = async (req, res) => {
-  const { email, password, role, userNme } = req.body;
+  const { email, password, role, userNme} = req.body;
   const salt = Number(process.env.SALT);
   
   const savedEmail = email.toLowerCase();
   const savedPassword = await bcrypt.hash(password, salt);
 
+
   const newUser = new userModel({
     email: savedEmail,
     password: savedPassword,
-    userNme,
     role,
+    userNme,
   });
+  
+
+  if (
+    password.length > 5 &&
+    /\d/.test(password) &&
+    /[a-z]/.test(password) &&
+    /[A-Z]/.test(password) &&
+    /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/.test(password)
+  )
+
   newUser
     .save()
     .then((result) => {
@@ -27,8 +39,13 @@ const register = async (req, res) => {
     })
     .catch((err) => {
       res.status(400).send(err);
-      console.log(err);
     });
+    
+    else {
+      console.log("the password is not complex");
+      res.status(400).json("the password is not complex");
+    
+    }
 };
 
 // get all users
@@ -107,4 +124,10 @@ const deleteUser = (req, res) => {
 
 
 
-module.exports = { register, getUsers, login , deleteUser};
+
+
+
+
+
+
+module.exports = {register, getUsers, login , deleteUser};

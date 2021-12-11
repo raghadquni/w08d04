@@ -38,7 +38,7 @@ const getAllPost = (req, res) => {
     const { id } = req.params;
   
     postModel
-      .findOne({user: req.token.id, isDel: false , _id: id})
+      .findOne({user: req.token.id, isDel: false})
       .then((result) => {
         if (result) {
           res.status(200).json(result);
